@@ -1,0 +1,16 @@
+*.pdf
+*.exe
+
+# Common C/C++ build outputs
+*.o
+*.obj
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+*.out
+
+# IDE / OS files
+.DS_Store
+Thumbs.db
