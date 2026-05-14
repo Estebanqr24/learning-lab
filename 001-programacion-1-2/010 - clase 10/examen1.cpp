@@ -59,15 +59,14 @@ int mostrarMenu() {
 }
 
 // Función para registrar estudiantes
-void registrarEstudiantes(string nombres[], float notas[], int &cantidad) {
-    cout << "Ingrese el nombre del estudiante: ";
+void registrarEstudiantes(string nombres[], double notas[], int &cantidad) {
+    cout << "Ingrese la cantidad de estudiantes: ";
     cin >> cantidad;
 
     while (cantidad < 1 || cantidad > 20) {
         cout << "Cantidad invalida. Ingrese nuevamente: ";
         cin >> cantidad;
     }
-}
 
 for (int i = 0 ; i < cantidad; i++) {
     cout << "Estudiante" << i + 1 << endl;
@@ -78,7 +77,7 @@ for (int i = 0 ; i < cantidad; i++) {
         cout << "Nombre inválido. Ingrese nuevamente: ";
         cin >> nombres[i];
     }
-
+}
 
 while (notas[i] < 0 || notas[i] > 20) {
     cout << "Nota inválida. Ingrese nuevamente: ";
@@ -88,7 +87,7 @@ while (notas[i] < 0 || notas[i] > 20) {
 
 
 // Función para mostrar listado de estudiantes
-void MostrarListado(string nombres[], float notas[], int cantidad) {
+void MostrarListado(string nombres[], double notas[], int cantidad) {
     if (cantidad == 0) {
         cout << "No hay estudiantes registrados." << endl;
     } else {
@@ -101,10 +100,49 @@ void MostrarListado(string nombres[], float notas[], int cantidad) {
 
 
 // Función para calcular promedio general
+void mostrarPromedio(double notas[], int cantidad) {
+double suma = 0;
+double promedio; 
 
+if (cantidad == 0) {
+    cout << "No hay estudiantes registrados para calcular el promedio." << endl;
+} else {
+    for (int i = 0; i < cantidad; i++) {
+        suma += notas[i];
+    }
+    promedio = suma / cantidad;
+    cout << "El promedio general de las notas es: " << promedio << endl;
+}
+}
 
 // Función para encontrar nota mayor y menor
+void mostrarMayorMenor(double notas[], string nombres[], int cantidad) {
+     double mayor;
+     double menor;
+     string nombreMayor;
+     string nombreMenor;
 
+     if (cantidad == 0) {
+        cout << "No hay estudiantes registrados para encontrar la nota mayor y menor." << endl;
+        } else {
+            mayor = notas[0];
+            menor = notas[0];
+            nombreMayor = nombres[0];
+            nombreMenor = nombres[0];
+
+            for (int i = 1; i < cantidad; i++) {
+                if (notas[i] > mayor) {
+                    mayor = notas[i];
+                    nombreMayor = nombres[i];
+                }
+                if (notas[i] < menor) {
+                    menor = notas[i];
+                    nombreMenor = nombres[i];
+                }
+            }
+        }
+    cout << "La nota mayor es: " << mayor << " del estudiante: " << nombreMayor << endl;
+    cout << "La nota menor es: " << menor << " del estudiante: " << nombreMenor << endl;}
 
 // Función para contar aprobados y desaprobados
 
@@ -112,4 +150,39 @@ void MostrarListado(string nombres[], float notas[], int cantidad) {
 // Función para buscar estudiante por nombre
 
 // Función principal
-   
+   int main() {
+    string nombres [20];
+    double notas [20];
+    int cantidad = 0;
+    int opcion;
+
+    do{
+        opcion = mostrarMenu();
+
+        switch (opcion) {
+            case 1:
+                registrarEstudiantes(nombres, notas, cantidad);
+                break;
+            case 2:
+                MostrarListado(nombres, notas, cantidad);
+                break;
+            case 3:
+                mostrarPromedio(notas, cantidad);
+                break;
+            case 4:
+                mostrarMayorMenor(notas, nombres, cantidad);
+                break;
+            case 5:
+                // contarAprobadosDesaprobados(notas, cantidad);
+                break;
+            case 6:
+                // buscarEstudiante(nombres, notas, cantidad);
+                break;
+            case 7:
+                cout << "Saliendo del programa. ¡Hasta luego!" << endl;
+                break;
+        }
+    } while (opcion != 7);
+     return 0;
+   }
+  
